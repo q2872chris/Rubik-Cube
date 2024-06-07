@@ -2,7 +2,7 @@ from pyglet.gl import *
 from pyglet.window import key, Window
 from pyglet.graphics import Batch
 from pyglet.clock import schedule
-from files.objects import cube
+from files.objects import rubik_cube_generator
 from files.camera import camera
 
 
@@ -22,7 +22,10 @@ class window(Window):
         self.title_screen_flag = False
         self.batch_2D = Batch()
         self.batch_3D = Batch()
-        cube(self.batch_3D)
+        dim = 3
+        width = 1
+        gap = 0.2
+        rubik_cube_generator(self.batch_3D, dim, width, gap)
         start_pos = [3, 3, 3]
         start_angle = [45, -30]
         self.camera = camera(start_pos, start_angle)
