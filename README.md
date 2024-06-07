@@ -24,8 +24,8 @@ christopherwiseman17@gmail.com
    * Added function to generate and render a full rubix cube 
 * 0.1
    * Repository creation:
-         - Basic camera with arrowkeys and mouse movement implemented
-         - Basic cube object rendered
+       * Basic camera with arrowkeys and mouse movement implemented
+       * Basic cube object rendered
 
 ## License
 
