@@ -1,5 +1,6 @@
 from pyglet.gl import GL_QUADS
 import numpy as np
+from collections import defaultdict
 
 points = np.array([(1, 1, 1), (-1, 1, 1), (-1, 1, -1), (1, 1, -1),
                    (1, -1, 1), (-1, -1, 1), (-1, -1, -1), (1, -1, -1)])
@@ -35,6 +36,21 @@ class cube:
         wound_vertex_vectors = [translated_vertices[i] for i in face_vertices]
         vertex_array = np.reshape(wound_vertex_vectors, (72, ))
         batch.add(*cube_args(vertex_array, colour_array))
+
+
+def rubik_cube_generator(batch, dim: int, width, gap):
+    end = (dim * width + (dim - 1) * gap) / 2
+    s = np.linspace(-end + width / 2, end - width / 2, dim)[::-1]
+    cols = [{s[0]: [palette[i], default],
+             s[-1]: [default, palette[i + 1]]}
+            for i in range(0, 6, 2)]
+    cols = [defaultdict(lambda: [default] * 2, c) for c in cols]
+    colours = lambda *yzx: sum([cols[i][yzx[i]] for i in range(3)], [])
+    if dim == 1:
+        colours = lambda *yzx: palette
+    cubes = np.array([[[cube(batch, (x, y, z), colours(y, z, x), width)
+                        for x in s] for z in s] for y in s])
+    return cubes
 
 
 
