@@ -12,3 +12,5 @@ void main()
     final_colour = texture(sampleTexture, tex_coords) *
                    vec4(vertex_colours, 0.0f);
 }
+
+// uses a custom file extension, can just save as a text file however
