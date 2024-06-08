@@ -2,8 +2,8 @@ from pyglet.gl import *
 from pyglet.window import key, Window
 from pyglet.graphics import Batch
 from pyglet.clock import schedule
-from files.objects import rubik_cube_generator
-from files.camera import camera
+from project_files.objects import rubik_cube_generator
+from project_files.camera import camera
 
 
 class window(Window):
