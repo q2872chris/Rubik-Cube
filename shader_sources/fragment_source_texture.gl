@@ -1,0 +1,14 @@
+#version 330
+
+in vec3 vertex_colours;
+in vec2 tex_coords;
+
+out vec4 final_colour;
+
+uniform sampler2D sampleTexture;
+
+void main()
+{
+    final_colour = texture(sampleTexture, tex_coords) *
+                   vec4(vertex_colours, 0.0f);
+}
