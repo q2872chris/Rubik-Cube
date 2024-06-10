@@ -1,12 +1,28 @@
 #version 330
 
-in vec3 vertex_colours;
+in vec3 colours_frag;
+in vec2 texture_coords_frag;
 
 out vec4 final_colour;
 
+uniform sampler2D sampleTexture;
+uniform bool colour_check = true;
+uniform bool texture_check = false;
+
+vec4 zero = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+vec4 unit = vec4(1.1f, 1.1f, 1.1f, 1.1f);
+
 void main()
 {
-    final_colour = vec4(vertex_colours, 0.0f);
+    final_colour = (colour_check || texture_check) ? unit : zero;
+    if (texture_check)
+    {
+        final_colour *= texture(sampleTexture, texture_coords_frag);
+    }
+    if (colour_check)
+    {
+        final_colour *= vec4(colours_frag, 0.0f);
+    }
 }
 
 // uses a custom file extension, can just save as a text file however
