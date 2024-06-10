@@ -1,0 +1,22 @@
+#version 330
+
+in vec3 vertices;
+in vec3 colours;
+in vec2 texture_coords;
+
+out vec3 colours_frag;
+out vec2 texture_coords_frag;
+
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
+
+void main()
+{
+    // does model have to be updated every frame for every cube?
+    gl_Position = projection * view * model * vec4(vertices, 1.0f);
+    colours_frag = colours;
+    texture_coords_frag = texture_coords;
+}
+
+// uses a custom file extension, can just save as a text file however
