@@ -62,4 +62,24 @@ class cube_generator:
         return group
 
 
+def generate_rubik_cube(program, batch, dim: int, width: float,
+                        gap: float, draw_inner=False):
+    cube = cube_generator(program, batch, width, draw_inner)
+    end = rubik_cube_width(dim, width, gap) / 2
+    s = np.linspace(-end + width / 2, end - width / 2, dim)[::-1]
+    colours = rubik_cube_colours(s)
+    cubes = np.array([[[cube((x, y, z), colours(y, z, x))
+                        for x in s] for z in s] for y in s])
+    return cubes
 
+
+def rubik_cube_colours(s):
+    if len(s) == 1:
+        colours = lambda *yzx: palette
+    else:
+        cols = [{s[0]: [palette[i], default],
+                 s[-1]: [default, palette[i + 1]]}
+                for i in range(0, 6, 2)]
+        cols = [defaultdict(lambda: [default, default], c) for c in cols]
+        colours = lambda *yzx: sum([cols[i][yzx[i]] for i in range(3)], [])
+    return colours
