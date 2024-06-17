@@ -36,6 +36,20 @@ class template:
 class cube_rotation_controller:
     def __init__(self, dim: int):
         self.U = template('y', -1, (0, 1), dim)           # up
+        self.D = template('y', 1, (dim - 1, dim), dim)  # down
+        self.R = template('x', -1, (0, 1), dim)  # right
+        self.L = template('x', 1, (dim - 1, dim), dim)  # left
+        self.F = template('z', 1, (0, 1), dim)  # front
+        self.B = template('z', -1, (dim - 1, dim), dim)  # back
+
+        self.M = template('x', 1, (1, dim - 1), dim)  # middle slice -> left
+        self.E = template('y', 1, (1, dim - 1), dim)  # middle slice -> down
+        self.S = template('z', 1, (1, dim - 1), dim)  # middle slice -> front
+
+        self.X = template('x', -1, (0, dim), dim)  # cube rotation -> right
+        self.Y = template('y', -1, (0, dim), dim)  # cube rotation -> up
+        self.Z = template('z', 1, (0, dim), dim)  # cube rotation -> front
+        
         self.__set_name_attributes()    # must be called last
 
 
