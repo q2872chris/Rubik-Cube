@@ -1,7 +1,7 @@
 import pyglet as py
 from pyglet.gl import *
 from pyglet.window import key
-from project_files.objects import cube_generator
+from project_files.objects import generate_rubik_cube
 from pyglet.graphics.shader import Shader, ShaderProgram
 from project_files.colours import sky, normalise_colour
 
@@ -23,7 +23,10 @@ class window(py.window.Window):
         self.batch_3D = py.graphics.Batch()
         self.program = self.activate_shader()
         self.update_projection()
-        test_cube = cube_generator(self.program, self.batch_3D)()
+        dim = int(max(min(dim, 20), 1))
+        width = 1
+        gap = 0.2
+        cubes = generate_rubik_cube(self.program, self.batch_3D, dim, width, gap)
         self.fps_display = py.window.FPSDisplay(window=self)
 
     def update_projection(self):
