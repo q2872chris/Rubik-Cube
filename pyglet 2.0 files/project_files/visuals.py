@@ -49,8 +49,23 @@ class cube_rotation_controller:
         self.X = template('x', -1, (0, dim), dim)  # cube rotation -> right
         self.Y = template('y', -1, (0, dim), dim)  # cube rotation -> up
         self.Z = template('z', 1, (0, dim), dim)  # cube rotation -> front
-        
+
+        self.__generate_wide_and_slice_moves(dim)
         self.__set_name_attributes()    # must be called last
+
+    def __generate_wide_and_slice_moves(self, dim):
+        for ind, i in enumerate(['U', 'R', 'F', 'D', 'L', 'B']):
+            move = getattr(self, i)
+            old_cut = np.array(move.cut)
+            for j in range(2, dim):
+                # higher dimension slice moves:
+                new_cut = old_cut + add(ind, j - 1, j - 1)
+                new_move = move.generate_new_move(cut=new_cut, dim=dim)
+                setattr(self, f"{j}{i}", new_move)
+                # higher dimension wide moves:
+                new_cut = old_cut + add(ind, 0, j - 1)
+                new_move = move.generate_new_move(cut=new_cut, dim=dim)
+                setattr(self, f"{j if j > 2 else ''}{i}w", new_move)
 
 
     def __set_name_attributes(self):
