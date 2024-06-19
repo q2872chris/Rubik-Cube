@@ -36,6 +36,13 @@ class window(py.window.Window):
             self.clipping_distance, self.render_distance, self.FOV)
         self.program['projection'] = proj_mat
 
+    def update_FOV(self, inc=False, dec=False):
+        if inc:
+            self.FOV -= 1
+        if dec:
+            self.FOV += 1
+        self.update_projection()
+
     @staticmethod
     def activate_shader():
         with open("project_files/shader_sources/vertex_source.gl") as reader:
@@ -53,6 +60,10 @@ class window(py.window.Window):
             case key.K:
                 self.exclusive = not self.exclusive
                 self.set_exclusive_mouse(self.exclusive)
+            case key.SEMICOLON:
+                self.update_FOV(dec=True)
+            case key.APOSTROPHE:
+                self.update_FOV(inc=True)
             case _:
                 pass
 
