@@ -6,8 +6,23 @@ from pyglet.graphics.shader import Shader, ShaderProgram
 from project_files.colours import sky, normalise_colour
 from project_files.engine import engine
 
+def load_timer(func):
+    def inner(self, *args, **kwargs):
+        load_time = timer(msg="Time taken to load cubes")
+        load_time.start()
+        func(self, *args, **kwargs)
+        load_time.end()
+        print("Rubik cube shape: {}x{}x{}".format(*self.cubes.shape))
+        print("Total cubes:", self.cubes.size)
+        batched_cubes = sum(i.draw_self for i in self.cubes.ravel())
+        print("Total batched cubes:", batched_cubes)
+        print("\n")
+        del self.cubes
+    return inner
+
 
 class window(py.window.Window):
+    @load_timer
     def __init__(self, *args, dim=4, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_location(380, 50)      # update
