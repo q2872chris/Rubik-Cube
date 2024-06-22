@@ -80,6 +80,8 @@ class window(py.window.Window):
             case key.K:
                 self.exclusive = not self.exclusive
                 self.set_exclusive_mouse(self.exclusive)
+            case key.T:
+                self.flip_texture_mode()
             case key.SEMICOLON:
                 self.update_FOV(dec=True)
             case key.APOSTROPHE:
