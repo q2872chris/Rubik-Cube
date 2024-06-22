@@ -46,6 +46,11 @@ class window(py.window.Window):
         cubes = generate_rubik_cube(self.program, self.batch_3D, dim, width, gap)
         self.fps_display = py.window.FPSDisplay(window=self)
 
+    def flip_texture_mode(self):
+        self.texture_mode = (self.texture_mode + 1) % 4
+        self.program['colour_check'] = self.texture_mode & 1
+        self.program['texture_check'] = self.texture_mode & 2
+
     def update_projection(self):
         proj_mat = Mat4.perspective_projection(self.aspect_ratio,
             self.clipping_distance, self.render_distance, self.FOV)
