@@ -30,7 +30,7 @@ def match(pa, s):   # regex
 def template(f):            # OLL/PLL template function
     def inner(self):
         rolls, mode = f(self)
-        with open(f"C:/Users/chris/OneDrive/Documents/Python/Python1/algorithms/{f.__name__}") as g:
+        with open(f"algorithms/{f.__name__}") as g:
             t = g.read().strip().splitlines()
             c = [[k.strip().split(" "), j] for j, k in [i.split(":") for i in t]]
             a = {"".join(i): j for i, j in c}
