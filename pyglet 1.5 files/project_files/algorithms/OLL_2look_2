@@ -1,0 +1,8 @@
+: y.. y.. y.. y..
+F' (Rw U R' U') (Rw' F R): ..y y.. .y. y..
+R2 D (R' U2 R) D' (R' U2 R'): y.. .y. .y. y..
+(Rw U R' U') (Rw' F R F'): .y. .y. y.. y..
+(R U R' U) (R U2 R'): ... y.. .y.  ...
+(R' U' R U') (R' U2 R): y.. ... ... .y.
+F (R U R' U')*3 F': .y. .y. .y. .y.
+R U2 (R2 U' R2 U' R2) U2 R: ..y ..y .y. .y.
