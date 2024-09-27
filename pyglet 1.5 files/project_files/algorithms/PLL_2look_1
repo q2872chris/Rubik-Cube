@@ -1,0 +1,3 @@
+: y.x y.x y.z y.z
+(R U R' U' R' F R2) (U' R' U' R U R' F'): y.x y.x y.. y..
+(F R U' R' U' R U R' F') (R U R' U' R' F R F'): y.. y.. y.. y..
