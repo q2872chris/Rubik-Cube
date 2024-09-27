@@ -2,6 +2,7 @@
 3D virtual Rubik cube
 
 ## Description
+This project is more being used as a repository for code I wrote in pycharm due to its small scale, rather than as a development tool.
 
 ## Getting Started
 
